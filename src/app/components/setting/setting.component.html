@@ -1,0 +1,51 @@
+<div class="setting">
+    <div class="setting-left">
+        <div class="item-setting" (click)="activeTab(0)" [ngClass]="{'item-active':tabActive===0}"> 
+            <i class="fa fa-compass fa-1g" aria-hidden="true"></i>
+            <span>  PTZ setting</span></div>
+        <div class="item-setting" (click)="activeTab(1)" [ngClass]="{'item-active':tabActive===1}">
+            <i class="fa fa-camera-retro fa-1g"></i>
+            <span>  Camera setting</span></div>
+        <div class="item-setting" (click)="activeTab(2)" [ngClass]="{'item-active':tabActive===2}">
+            <i class="fa fa-clock-o fa-1g" aria-hidden="true"></i>
+            <span>  Timeline setting</span>
+        </div>
+    </div>
+    <div class="setting-right">
+        <div class="right-container">
+            <div class="setting-header flex">
+                <span>Command</span>
+                <span>Shortcut</span>
+            </div>
+            <div class="setting-body">
+                <perfect-scrollbar>
+                    <div *ngFor="let data of dataSetting; let gIdx = index;">
+                        <div *ngIf="tabActive === gIdx">
+                            <div *ngFor="let item of data; let idx = index;" class="row-conatiner" (click)="selectSetting(gIdx ,idx)"> 
+                                <div class="row flex">
+                                    <span  class="row-setting"  [ngClass]="{'row-cmd': item.setting}">{{item.command}}</span>
+                                    <span class="row-setting row-input" *ngIf="!item.setting" >
+                                        <input style="background-color: #65676f;" class="row-setting"
+                                                type="text" 
+                                                name="country" 
+                                                value="{{item.shorcut}}" 
+                                                readonly>
+                                    </span> 
+                                    <span  class="row-setting row-input" *ngIf="item.setting">
+                                        <input appClickOutSide style="color: white;" class="row-setting input-val" type="text"
+                                                (clickOutside)="clearHintPress()"
+                                                (click)="focusInput($event, gIdx, idx)"
+                                                readonly="" 
+                                                (keypress)="keyPressSetting($event,gIdx, idx)"
+                                                value="{{item.shorcut}}">
+                                    </span>
+                                    <span *ngIf="hintPress[gIdx][idx]" class="row-title">Press key in keyboard</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </perfect-scrollbar>
+            </div>    
+        </div>
+    </div>
+</div>

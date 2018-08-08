@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default flex flex-rows v-centered" role="navigation">
+    <div class="logo-container flex h-centered v-centered" ng-click="displayNavigation()">
+        <div class="dl-logo-circle dl-logo" ng-class="{'n-active': showNavigation}"></div>
+    </div>
+    <div class="tab-container">
+        <ul class="nav navbar-nav global-tab flex flex-rows v-centered">
+           <li class="item">
+              <a routerLink="/surveillance" routerLinkActive="active">
+                <i class="fa fa-desktop" aria-hidden="true">  surveillance</i>
+              </a>
+          </li>
+          <li class="item">
+              <a routerLink="/setting" routerLinkActive="active">
+                <i class="fa fa-cog" aria-hidden="true">  Setting</i>
+              </a>
+          </li>
+        </ul>
+    </div>
+</nav>
