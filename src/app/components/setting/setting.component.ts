@@ -18,6 +18,7 @@ export class SettingComponent implements OnInit {
 	hintPress     : any[];
 	preIndex      : number;
 	keyCodePrevent: any[];
+	currentTemp:number;
 
 	constructor(public _service: SettingService, private messageService: MessageService) {
 		this.dataSetting    = this._service.getDataSetting();
@@ -39,8 +40,11 @@ export class SettingComponent implements OnInit {
 
 	selectSetting(gIdx: number, index: number): void {
 		
-		this.messageService.sendMessage({app:'Message from settingComponent to app!'});
-		this.messageService.sendMessage({header:'Message from settingComponent to header!'});
+		this.messageService.getCurrentTemp('Paris').subscribe((data: number) => {
+	      this.currentTemp = data;
+	      console.log("this.currentTemp", this.currentTemp);
+	    });
+
 		this.clearHintPress(undefined);
 
 		this.preIndex = this._service.getPreIndex()[gIdx];
